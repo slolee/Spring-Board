@@ -1,0 +1,17 @@
+1560237971331	Move file
+1560238280209	Move file
+1560243475534	Delete element
+1560244701398	Rename type 'BoardController'
+1560250778734	Delete element
+1560314757197	Delete element
+1560316458830	Rename resource 'adminView.jsp'
+1560316480716	Rename resource 'mypageResult.jsp'
+1560317615967	Rename resource 'SignoutView.jsp'
+1560388886736	Rename type 'memberDAO_'
+1560388906506	Rename type 'memberDAO'
+1560388911537	Rename type 'memberService_'
+1560388928193	Rename type 'memberService'
+1560388945903	Rename type 'memberVO'
+1560398276814	Delete elements
+1560398283288	Delete elements
+1560411399778	Encapsulate field 'write_pw'

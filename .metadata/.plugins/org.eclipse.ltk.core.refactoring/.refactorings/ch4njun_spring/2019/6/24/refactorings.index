@@ -1,0 +1,17 @@
+1560150072666	Rename resource 'NewFile.jsp'
+1560153242476	Rename resource 'Test.jsp'
+1560218543866	Rename package 'com.ch4njun.test'
+1560218586090	Copy package
+1560218597212	Delete element
+1560218608944	Rename package 'com.ch4njun.vo'
+1560219517855	Rename package 'com.ch4njun'
+1560219529190	Rename package 'com.ch4njun.controller'
+1560219540659	Rename package 'com.ch4njun.model'
+1560220548698	Delete element
+1560221064526	Delete element
+1560222366312	Rename package 'com.ch4njun.spring01'
+1560222409184	Rename package 'com.ch4njun'
+1560226256913	Rename resource 'context-1-datasource.txt'
+1560226262710	Rename resource 'context-2-mybatis.txt'
+1560226266046	Rename resource 'context-3-dao.txt'
+1560226293685	Copy file

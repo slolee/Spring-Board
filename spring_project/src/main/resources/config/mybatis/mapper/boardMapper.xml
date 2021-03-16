@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="boardList" resultType="boardVO">
+		select * from board order by idx desc;
+	</select>
+	
+	<select id="boardList_condition" parameterType="java.util.Map" resultType="boardVO">
+	<![CDATA[ select X.*
+		from ( 
+    		select rownum as rown, A.*
+			from (
+				select *
+				from board
+				order by idx desc) A
+			where rownum <= #{ end }) X
+		where X.rown >= #{ start }  ]]>
+	</select>
+
+	<select id="boardRead" resultType="boardVO" parameterType="int">
+		select * from board where idx = #{ idx }
+	</select>
+	
+	<select id="board_count" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<select id="board_selectFileName" resultType="String" parameterType="int">
+		select file_path from board where idx = #{ idx }
+	</select>
+	
+	<insert id="board_insert" parameterType="boardVO">
+		insert into board
+		(idx, id, title, context, write_pw, file_path)
+		values
+		(seq_board_index.nextval,
+		#{ id }, #{ title }, #{ context }, #{ write_pw }, #{ file_path })
+	</insert>
+	
+	<insert id="board_insert_nopw" parameterType="boardVO">
+		insert into board
+		(idx, id, title, context, file_path)
+		values
+		(seq_board_index.nextval,
+		#{ id }, #{ title }, #{ context }, #{ file_path })
+	</insert>
+
+	<update id="upHit" parameterType="int">
+		update board set hit = hit + 1 where idx = #{ idx }
+	</update>
+	
+	<update id="board_updateOne" parameterType="boardVO">
+		update board set title = #{ title }, context = #{ context }, write_pw = #{ write_pw }, file_path = #{ file_path } where idx = #{ idx }
+	</update>
+	
+	<update id="board_updateOne_noPw" parameterType="boardVO">
+		update board set title = #{ title }, context = #{ context }, file_path = #{ file_path } where idx = #{ idx }
+	</update>
+	
+	<delete id="board_deleteOne" parameterType="int">
+		delete from board where idx = #{ idx }
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

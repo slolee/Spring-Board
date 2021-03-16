@@ -1,0 +1,34 @@
+create sequence seq_board_index nocache;
+
+create table member(
+	id varchar2(30) primary key,
+	nickname varchar2(30) not null,
+	pw varchar2(30) not null,
+	email varchar2(30) not null,
+	phone varchar2(30) not null
+);
+
+create table board(
+	idx number(10) primary key,
+	id varchar2(30) not null,
+	title varchar2(200) not null,
+	context varchar2(1000) not null,
+	write_pw varchar2(30),
+	regdate date default sysdate,
+	file_path varchar2(200),
+	hit number(10) default 0,
+	coments number(10) default 0,
+	constraint fk_id foreign key(id) references member(id)
+);
+
+create table coments(
+	idx number(10) primary key,
+	id varchar2(30) not null,
+	regdate date default sysdate,
+	context varchar2(300) not null,
+	constraint fk_index foreign key(idx) references board(idx)
+);
+
+select seq_board_index.nextval from dual;
+alter sequence seq_board_index increment by -40; 하고 다시 +1로 수정해줘야한다.
+delete from board;

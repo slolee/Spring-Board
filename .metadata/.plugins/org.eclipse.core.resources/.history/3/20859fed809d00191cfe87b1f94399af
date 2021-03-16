@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:property-placeholder location="classpath:config/mybatis/db.properties"/>   
+	
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${url}"/>
+		<property name="username" value="${user}"/>
+		<property name="password" value="${password}"/>
+		<property name="defaultAutoCommit" value="false"/>
+		<property name="maxActive" value="10"/>
+	</bean>
+	
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+		<property name="dataSource" ref="ds"/>
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"/>
+	</bean>
+	
+	<bean id="sqlSessionBean" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<bean id="member_daoBean" class="dao.MemberDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	
+	<bean id="member_serviceBean" class="service.MemberService">
+		<property name="memberDao" ref="member_daoBean"></property>
+	</bean>
+	
+	<bean id="board_daoBean" class="dao.BoardDAO">
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	
+	<bean id="board_serviceBean" class="service.BoardService">
+		<property name="boardDao" ref="board_daoBean"></property>
+	</bean>
+	
+	<!-- MultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000" />
+		<property name="maxInMemorySize" value="100000000" />
+	</bean>
+</beans>
